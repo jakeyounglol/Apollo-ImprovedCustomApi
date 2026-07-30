@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
 - Add native **Reddit Polls** voting and creation behind an opt-in setting, using a separate per-account web session when needed (#643: @jordanearle)
 - Redesign **Detailed Profiles** with immersive banners, prominent avatars, glass stat cards, and improved Social Links (#655: @jordanearle)
 - Add modern **Reddit Chat** for API-Key-Free accounts, with an opt-in option for API-key accounts that preserves Apollo's legacy Direct Chat (#658: @icpryde)
+- Add **visionOS gaze hover** so looking at a feed row, a nav/toolbar button, or a comment's vote/reply/share controls highlights it — worked around Texture content being unaddressable to the gaze compositor with window-level ghost overlays; also adds pointer-hover highlights for the Mac Virtual Display cursor (@rebelancap)
+- Add **visionOS multiwindow**: Cmd-N / Cmd-Shift-N and a floating button to open or duplicate windows, plus **Open in New Window** on a post or comment long-press so a thread opens in its own window beside the feed (@rebelancap)
 
 ### Fixes
 
