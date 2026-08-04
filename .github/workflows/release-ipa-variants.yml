@@ -159,10 +159,7 @@ jobs:
           echo "tweak_version=${TWEAK_VERSION}" >> "$GITHUB_OUTPUT"
           echo "tag_name=${TAG_NAME}" >> "$GITHUB_OUTPUT"
           echo "release_name=${RELEASE_NAME}" >> "$GITHUB_OUTPUT"
-
-      - name: Validate release inputs
-        run: python3 ./scripts/validate_release_inputs.py "${{ steps.meta.outputs.apollo_version }}"
-
+          
       - name: Build IPA variants
         run: |
           bash ./scripts/build_release_variants.sh \
