@@ -64,6 +64,22 @@ static NSString *const UDKeyReadPostMaxCount = @"ReadPostMaxCount";
 static NSString *const UDKeyShowRecentlyReadThumbnails = @"ShowRecentlyReadThumbnails";
 static NSString *const UDKeyPreferredGIFFallbackFormat = @"PreferredGIFFallbackFormat";
 static NSString *const UDKeyUnmuteCommentsVideos = @"UnmuteCommentsVideos";
+// "Unmute Videos in Feed": how feed videos behave when they autoplay while
+// scrolling. 0 = Never (default — Apollo's stock behaviour, always muted),
+// 1 = Remember (follow the last manual mute/unmute the user made on a FEED
+// video, persisted in UDKeyFeedVideosUnmutedMemory), 2 = Always (every feed
+// video autoplays with sound). Only one feed video is ever audible at a time.
+// See ApolloVideoUnmute.xm.
+static NSString *const UDKeyUnmuteFeedVideos = @"UnmuteFeedVideos";
+// Backing store for Remember mode above: YES once the user unmutes a feed video
+// with the mute button, NO once they mute one again. Written ONLY by a genuine
+// mute-button tap on a feed video, never by an automatic unmute. Default NO.
+static NSString *const UDKeyFeedVideosUnmutedMemory = @"FeedVideosUnmutedMemory";
+// "Feed Video Scrubber": press and hold the thin progress bar at the bottom of
+// a feed video, then slide to scrub it, for every inline player type. Tapping
+// the video (bar included) still opens it fullscreen as stock. Default NO.
+// See ApolloFeedVideoScrubber.xm.
+static NSString *const UDKeyFeedVideoScrubber = @"FeedVideoScrubber";
 // "Hold for Video Speed": press-and-hold the right side of a fullscreen video to
 // play at a chosen speed while held. Master toggle (default YES via
 // registerDefaults — preserves the original always-on behaviour) and the speed
@@ -119,9 +135,19 @@ static NSString *const UDKeyImageUploadProvider = @"ImageUploadProvider";
 // plain link (no native Reddit media) so they work in subreddits that disallow
 // image/GIF comments. See ApolloMarkdownToolbarGif.xm + ApolloImageUploadHost.xm.
 static NSString *const UDKeyCommentLinkHost = @"CommentLinkHost";
+// Auto mode for the Comment Link Host (default OFF). When ON, comment-editor
+// images are forced onto Reddit's NATIVE media upload (they render inline on
+// every client) wherever the subreddit allows image comments; the link host
+// above is used only where the subreddit disallows them — or when the
+// permissions aren't known yet, since a plain link always posts. Only
+// consulted while a Comment Link Host is set.
+static NSString *const UDKeyCommentLinkPreferNative = @"CommentLinkPreferNative";
 // Posted after sCommentLinkHost changes so open composers re-apply the comment
 // media-permission gating (the image button un-blocks while a link host is set).
 static NSString *const ApolloCommentLinkHostChangedNotification = @"ApolloCommentLinkHostChangedNotification";
+// Outgoing Reddit URL host for Apollo share sheets (ShareLinkHost enum). Default
+// keeps Apollo's stock reddit.com links; Old Reddit/vxReddit rewrite share URLs.
+static NSString *const UDKeyShareLinkHost = @"ShareLinkHost";
 static NSString *const UDKeyShowUserAvatars = @"ShowUserAvatars";
 static NSString *const UDKeyUseProfileAvatarTabIcon = @"UseProfileAvatarTabIcon";
 // When ON, the main tab bar removes its visible text labels and lets UIKit lay

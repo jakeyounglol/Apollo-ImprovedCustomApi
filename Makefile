@@ -50,6 +50,7 @@ ApolloReborn_FILES = \
     $(WHATS_NEW_GEN_M) \
     $(SRC_DIR)/Tweak.xm \
     $(SRC_DIR)/ApolloCommon.m \
+    $(SRC_DIR)/ApolloWebTextDecoding.m \
     $(SRC_DIR)/ApolloMemoryDiagnostics.m \
     $(SRC_DIR)/settings/ApolloSettingsTableViewController.m \
     $(SRC_DIR)/settings/ApolloSettingsForm.m \
@@ -57,6 +58,8 @@ ApolloReborn_FILES = \
     $(SRC_DIR)/settings/ApolloBackupRestore.m \
     $(SRC_DIR)/settings/ApolloThanksToViewController.m \
     $(SRC_DIR)/settings/ApolloBuyUsACoffeeViewController.m \
+    $(SRC_DIR)/settings/ApolloWallpaperViewerViewController.m \
+    $(SRC_DIR)/settings/ApolloWallpapersViewController.m \
     $(SRC_DIR)/settings/ApolloReportViewController.m \
     $(SRC_DIR)/settings/ApolloSettingsRouter.m \
     $(SRC_DIR)/settings/ApolloSettingsSearch.m \
@@ -160,6 +163,7 @@ ApolloReborn_FILES = \
     $(SRC_DIR)/ApolloAppleTranslateSheet.swift \
     $(SRC_DIR)/ApolloAppleTranslateSheet.xm \
     $(SRC_DIR)/ApolloVideoUnmute.xm \
+    $(SRC_DIR)/ApolloFeedVideoScrubber.xm \
     $(SRC_DIR)/ApolloVideoSwipeFix.xm \
     $(SRC_DIR)/ApolloVideoPlaybackSpeed.xm \
     $(SRC_DIR)/ApolloVideoHoldSpeed.xm \

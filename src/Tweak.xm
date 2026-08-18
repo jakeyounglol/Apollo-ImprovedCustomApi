@@ -3562,6 +3562,9 @@ static BOOL ApolloDefaultsKeyChangesActiveAccount(NSString *key) {
                                     UDKeyDevvitFeedWidgets: @YES,
                                     UDKeyPreferredGIFFallbackFormat: @1,
                                     UDKeyUnmuteCommentsVideos: @0,
+                                    UDKeyUnmuteFeedVideos: @0,
+                                    UDKeyFeedVideosUnmutedMemory: @NO,
+                                    UDKeyFeedVideoScrubber: @NO,
                                     UDKeyVideoHoldSpeedEnabled: @YES,
                                     UDKeyVideoHoldSpeed: @2.0,
                                     UDKeyProxyImgurDDG: @NO,
@@ -3578,6 +3581,8 @@ static BOOL ApolloDefaultsKeyChangesActiveAccount(NSString *key) {
                                     UDKeyLinkPreviewCardColor: @(ApolloLinkPreviewCardColorNeutral),
                                     UDKeyImageUploadProvider: @(ImageUploadProviderImgur),
                                     UDKeyCommentLinkHost: @(CommentLinkHostOff),
+                                    UDKeyCommentLinkPreferNative: @NO,
+                                    UDKeyShareLinkHost: @(ShareLinkHostDefault),
                                     UDKeyShowUserAvatars: @NO,
                                     UDKeyUseProfileAvatarTabIcon: @NO,
                                     UDKeyHideTabBarTitles: @NO,
@@ -3687,6 +3692,8 @@ static BOOL ApolloDefaultsKeyChangesActiveAccount(NSString *key) {
     sPreferredGIFFallbackFormat = ([[NSUserDefaults standardUserDefaults] integerForKey:UDKeyPreferredGIFFallbackFormat] == 0) ? 0 : 1;
     sReadPostMaxCount = [[NSUserDefaults standardUserDefaults] integerForKey:UDKeyReadPostMaxCount];
     sUnmuteCommentsVideos = [[NSUserDefaults standardUserDefaults] integerForKey:UDKeyUnmuteCommentsVideos];
+    sUnmuteFeedVideos = [[NSUserDefaults standardUserDefaults] integerForKey:UDKeyUnmuteFeedVideos];
+    sFeedVideoScrubber = [[NSUserDefaults standardUserDefaults] boolForKey:UDKeyFeedVideoScrubber];
     sVideoHoldSpeedEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:UDKeyVideoHoldSpeedEnabled];
     sVideoHoldSpeed = ApolloSanitizedHoldSpeed([[NSUserDefaults standardUserDefaults] floatForKey:UDKeyVideoHoldSpeed]);
     sProxyImgurDDG = [[NSUserDefaults standardUserDefaults] boolForKey:UDKeyProxyImgurDDG];
@@ -3811,6 +3818,9 @@ static BOOL ApolloDefaultsKeyChangesActiveAccount(NSString *key) {
     sImageUploadProvider = [[NSUserDefaults standardUserDefaults] integerForKey:UDKeyImageUploadProvider];
     sCommentLinkHost = [[NSUserDefaults standardUserDefaults] integerForKey:UDKeyCommentLinkHost];
     if (sCommentLinkHost < CommentLinkHostOff || sCommentLinkHost > CommentLinkHostImgChest) sCommentLinkHost = CommentLinkHostOff;
+    sCommentLinkPreferNative = [[NSUserDefaults standardUserDefaults] boolForKey:UDKeyCommentLinkPreferNative];
+    sShareLinkHost = [[NSUserDefaults standardUserDefaults] integerForKey:UDKeyShareLinkHost];
+    if (sShareLinkHost < ShareLinkHostDefault || sShareLinkHost > ShareLinkHostFXReddit) sShareLinkHost = ShareLinkHostDefault;
     sShowUserAvatars = [[NSUserDefaults standardUserDefaults] boolForKey:UDKeyShowUserAvatars];
     sUseProfileAvatarTabIcon = [[NSUserDefaults standardUserDefaults] boolForKey:UDKeyUseProfileAvatarTabIcon];
     sHideTabBarTitles = [[NSUserDefaults standardUserDefaults] boolForKey:UDKeyHideTabBarTitles];

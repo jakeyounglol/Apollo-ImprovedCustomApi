@@ -40,6 +40,17 @@ extern NSInteger sReadPostMaxCount;
 // 0 = Default (off), 1 = Remember from Full Screen, 2 = Always
 extern NSInteger sUnmuteCommentsVideos;
 
+// "Unmute Videos in Feed" — how feed videos sound when they autoplay while
+// scrolling. 0 = Never (default, stock behaviour), 1 = Remember (mirror the
+// user's last manual mute/unmute of a feed video, stored in
+// UDKeyFeedVideosUnmutedMemory), 2 = Always. See ApolloVideoUnmute.xm.
+extern NSInteger sUnmuteFeedVideos;
+
+// "Feed Video Scrubber" — when ON, press-and-hold the progress bar at the
+// bottom of a feed video and slide to scrub it in place; taps keep opening the
+// fullscreen viewer as stock. Default OFF. See ApolloFeedVideoScrubber.xm.
+extern BOOL sFeedVideoScrubber;
+
 // "Hold for Video Speed": when ON (default), press-and-hold the right side of a
 // fullscreen video to play it at sVideoHoldSpeed while held; release restores the
 // prior rate. When OFF the right side behaves like the rest of the player (normal
@@ -390,6 +401,33 @@ typedef NS_ENUM(NSInteger, CommentLinkHost) {
     CommentLinkHostImgChest = 2,
 };
 extern NSInteger sCommentLinkHost;
+// Auto mode (UDKeyCommentLinkPreferNative): comment images go to Reddit's native
+// upload where the subreddit allows image comments; the link host is only the
+// fallback. Consulted at photo-button arming time in ApolloMarkdownToolbarGif.xm.
+extern BOOL sCommentLinkPreferNative;
+
+// Share Link Host: rewrites outgoing Reddit URLs in Apollo share sheets. Default
+// preserves Apollo's original reddit.com links; Old Reddit/vxReddit swap only
+// the host/scheme while preserving the path and query.
+typedef NS_ENUM(NSInteger, ShareLinkHost) {
+    ShareLinkHostDefault = 0,
+    ShareLinkHostOldReddit = 1,
+    ShareLinkHostVXReddit = 2,
+    ShareLinkHostFXReddit = 3,
+};
+// extern "C" so the ObjC++ (.xm) caller in ApolloShareAsImageLink.xm and the
+// ObjC (.m) definitions in ApolloState.m agree on the unmangled symbol name.
+#ifdef __cplusplus
+extern "C" {
+#endif
+// nil for ShareLinkHostDefault — callers keep Apollo's original host.
+NSString *ApolloShareLinkHostDomain(ShareLinkHost host);
+// Settings-facing label for the picker row and its detail text.
+NSString *ApolloShareLinkHostDisplayName(ShareLinkHost host);
+#ifdef __cplusplus
+}
+#endif
+extern NSInteger sShareLinkHost;
 
 // Most recently observed Reddit bearer token, captured from outgoing Authorization
 // headers. Used by the native Reddit image upload path. nil if Apollo hasn't made an
